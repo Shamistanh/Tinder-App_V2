@@ -1,0 +1,1 @@
+INSERT INTO users (id, username, password, pic, date) VALUES ('1111111111','first2@gmail.com','first','pic.jpg', '2020-05-13');
