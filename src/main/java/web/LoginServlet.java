@@ -22,36 +22,28 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static String user = "";
-    private static String pwd = "";
+    public static String user = "";
+    public static String pwd = "";
     Connection connection ;
-    private static AddCookie addCookie;
+
 
     public LoginServlet(Connection connection) {
         this.connection = connection;
     }
-
+    Checker checker = new Checker(connection);
     public LoginServlet() {
 
     }
 
-    public static String getUser() {
-        return user;
-    }
-
-    public static String getPwd() {
-        return pwd;
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Checker checker = new Checker(connection);
         user = request.getParameter("logemail");
         pwd = request.getParameter("logpsw");
-
-
-
+        AddCookie.add("my_name", user, response);
+        AddCookie.add("my_pwd", pwd, response);
+        System.out.println("i am now in login servlet and user and pwd: "+user+" "+pwd);
         if(checker.check(user, pwd)){
             response.sendRedirect("/liked");
         }else {
@@ -67,8 +59,7 @@ public class LoginServlet extends HttpServlet {
         try (OutputStream os = response.getOutputStream()) {
             Files.copy(Paths.get("content/templates", "login.html"), os);
         }
-        addCookie.add("my_name", user, response);
-        addCookie.add("my_pwd", pwd, response);
+
 
     }
 

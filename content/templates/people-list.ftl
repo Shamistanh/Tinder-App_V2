@@ -38,20 +38,20 @@
 
                                     </td>
                                     <td class="align-middle">
-                                        ${user.getUsername() }
+                                        ${user.getUsername()}
                                         <#--                                       Herbert Hoover-->
                                     </td>
                                     <td class="align-middle">
                                         Builder Sales Agent
                                     </td>
                                     <td  class="align-middle">
-                                        Last Login:  0 <br><small class="text-muted">${user.getDay()}days ago</small>
+                                        Last Login:  0 <br><small class="text-muted">5 days ago</small>
                                         <#--                                       ${user.getDate()}-->
                                     </td>
                                     <td>
 
                                         <form method="get" >
-                                            <input type="hidden" name="user_idd" value="${user.getId()}"/>
+                                            <input type="text" name="user_idd" value="${user.getId()}"/>
                                             <input type="submit" value="Send Message" class="btn-btn-outline-success">
 
                                         </form>

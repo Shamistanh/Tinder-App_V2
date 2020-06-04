@@ -23,7 +23,8 @@ public class LogoutServlet extends HttpServlet {
                 });
 
         try (PrintWriter w = resp.getWriter()) {
-            w.write("<h1 style='color:green;'>You successfully logged out</h1>");
+            w.write("<center><h1 style='color:green;'>You successfully logged out</h1></center>");
+          //  w.write("<center><a style= 'text-decoration:none;' href='/login'>Login</a></center>");
 
         }
     }

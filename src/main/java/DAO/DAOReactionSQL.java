@@ -1,9 +1,11 @@
 package DAO;
 import beans.Reaction;
 import beans.User;
+import db.ConnDetails;
 import lombok.SneakyThrows;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -31,6 +33,10 @@ public class DAOReactionSQL implements DAO<Reaction> {
     @SneakyThrows
     @Override
     public List<Reaction> getAll() {
+        Class.forName(ConnDetails.dbDriver);
+        Connection conn = DriverManager.getConnection(ConnDetails.url,
+                ConnDetails.username,
+                ConnDetails.password);
         PreparedStatement stmt = conn.prepareStatement(SQL_getAll);
         ResultSet rset = stmt.executeQuery();
         ArrayList<Reaction> data = new ArrayList<>();
@@ -72,6 +78,10 @@ public class DAOReactionSQL implements DAO<Reaction> {
     @SneakyThrows
     @Override
     public void put(Reaction reaction) {
+        Class.forName(ConnDetails.dbDriver);
+        Connection conn = DriverManager.getConnection(ConnDetails.url,
+                ConnDetails.username,
+                ConnDetails.password);
         PreparedStatement stmt = conn.prepareStatement(SQL_put);
         stmt.setString(1, reaction.getWho());
         stmt.setString(2, reaction.getWhom());

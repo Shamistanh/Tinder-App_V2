@@ -19,7 +19,7 @@ public class RegisterServlet extends HttpServlet {
     static String username;
     static String password;
     static String repassword;
-    MyId myId = new MyId();
+
     static String id;
     static  String profile;
      static Connection con;
@@ -27,8 +27,7 @@ public class RegisterServlet extends HttpServlet {
     public RegisterServlet(Connection con) {
         this.con = con;
     }
-    static DAOUserSQL daoUserSQL = new DAOUserSQL(con);
-
+    public static DAOUserSQL daoUserSQL;
 
 
     @Override
@@ -45,7 +44,7 @@ public class RegisterServlet extends HttpServlet {
         password = req.getParameter("psw");
         repassword = req.getParameter("repsw");
         profile = req.getParameter("profile");
-        id = myId.generateId(username,password);
+        id = MyId.generateId(username,password);
         System.out.println(username+", "+ password+", "+ repassword+", "+ profile+"," + id);
         User user  = new User(username,password,profile, Date.valueOf("2020-05-13"),id);
 //        if (password == repassword){

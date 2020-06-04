@@ -42,11 +42,12 @@ public class DAOUserSQL implements DAO<User> {
         ArrayList<User> data = new ArrayList<>();
         while (rset.next()) {
             User s = new User(
-                    rset.getString("id"),
                     rset.getString("username"),
                     rset.getString("password"),
+                    rset.getString("pic"),
                     rset.getDate("created_at"),
-                    rset.getString("pic")
+                    rset.getString("id")
+
 
             );
             data.add(s);
@@ -62,16 +63,20 @@ public class DAOUserSQL implements DAO<User> {
     @SneakyThrows
     @Override
     public Optional<User> get(String id) {
+        Class.forName(ConnDetails.dbDriver);
+        Connection conn = DriverManager.getConnection(ConnDetails.url,
+                ConnDetails.username,
+                ConnDetails.password);
         PreparedStatement stmt = conn.prepareStatement(SQL_get);
         stmt.setString(1, id);
         ResultSet rset = stmt.executeQuery();
         return !rset.next() ? Optional.empty() : Optional.of(
                 new User(
-                        rset.getString("id"),
                         rset.getString("username"),
                         rset.getString("password"),
+                        rset.getString("pic"),
                         rset.getDate("created_at"),
-                        rset.getString("pic")
+                        rset.getString("id")
 
                 )
         );

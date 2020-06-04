@@ -16,18 +16,21 @@ public class Checker {
     static String password = "";
     static HashMap<String, String> users = new HashMap<>();
 
+
     public Checker(Connection conn) {
         this.conn = conn;
     }
+    public static DAOUserSQL daoUserSQL = new DAOUserSQL(conn);
 
     public static HashMap<String, String> all_users() {
-        DAOUserSQL daoUserSQL = new DAOUserSQL(conn);
-        return (HashMap<String, String>) daoUserSQL.getAll().stream().collect(Collectors.toMap(User::getPassword,User::getUsername));
+        HashMap<String, String> hm = (HashMap<String, String>) daoUserSQL.getAll().stream().collect(Collectors.toMap(User::getPassword,User::getUsername));
+        System.out.println(hm);
+        return hm;
     }
 
     public boolean check(String user, String pwd) {
         System.out.println(all_users());
-        return all_users().get(user).equals(pwd);
+        return all_users().get(pwd).equals(user);
 
     }
 

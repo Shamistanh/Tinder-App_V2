@@ -3,9 +3,11 @@ package DAO;
 import beans.Message;
 import beans.Message;
 import beans.User;
+import db.ConnDetails;
 import lombok.SneakyThrows;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -33,6 +35,10 @@ public class DAOMessageSQL implements DAO<Message> {
     @SneakyThrows
     @Override
     public List<Message> getAll() {
+        Class.forName(ConnDetails.dbDriver);
+        Connection conn = DriverManager.getConnection(ConnDetails.url,
+                ConnDetails.username,
+                ConnDetails.password);
         PreparedStatement stmt = conn.prepareStatement(SQL_getAll);
         ResultSet rset = stmt.executeQuery();
         ArrayList<Message> data = new ArrayList<>();
@@ -56,6 +62,10 @@ public class DAOMessageSQL implements DAO<Message> {
     @SneakyThrows
     @Override
     public Optional<Message> get(String id) {
+        Class.forName(ConnDetails.dbDriver);
+        Connection conn = DriverManager.getConnection(ConnDetails.url,
+                ConnDetails.username,
+                ConnDetails.password);
         PreparedStatement stmt = conn.prepareStatement(SQL_get);
         stmt.setString(1, id);
         ResultSet rset = stmt.executeQuery();
@@ -72,6 +82,10 @@ public class DAOMessageSQL implements DAO<Message> {
     @SneakyThrows
     @Override
     public void put(Message message) {
+        Class.forName(ConnDetails.dbDriver);
+        Connection conn = DriverManager.getConnection(ConnDetails.url,
+                ConnDetails.username,
+                ConnDetails.password);
         PreparedStatement stmt = conn.prepareStatement(SQL_put);
         stmt.setString(1, message.getWho());
         stmt.setString(2, message.getWhom());

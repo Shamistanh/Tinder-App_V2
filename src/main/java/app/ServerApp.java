@@ -38,6 +38,7 @@ public class ServerApp {
         handler.addServlet(new ServletHolder(new MessageServlet(engine,conn)), "/messages");
         handler.addServlet(new ServletHolder(new RegisterServlet(conn)), "/register/*");
         handler.addServlet(new ServletHolder(new LoginServlet(conn)), "/login");
+        handler.addServlet(new ServletHolder(new LogoutServlet()), "/logout");
         handler.addServlet(new ServletHolder(new StaticServlet("images")), "/images");
         handler.addServlet(new ServletHolder(new StaticServlet("js")), "/js/*");
         handler.addServlet(new ServletHolder(new StaticServlet("css")), "/css/*");
