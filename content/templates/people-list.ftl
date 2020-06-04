@@ -64,7 +64,8 @@
                                 </tr>
 
                             </#list>
-                            <a href="/users" class="btn btn-danger" style="color: white">Back</a>
+                            <a href="/liked" class="btn btn-danger" style="color: white">Back</a>
+                            <a href="/logout" class="btn btn-danger ml-2" style="color: white">Logout</a>
                             </tbody>
                         </table>
                     </div>

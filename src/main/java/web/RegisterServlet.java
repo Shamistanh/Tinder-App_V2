@@ -2,7 +2,7 @@ package web;
 
 import DAO.DAOUserSQL;
 import beans.User;
-import service.AddCookie;
+import service.MyCookie;
 import service.MyId;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -11,8 +11,6 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
-import java.sql.Date;
-import java.time.LocalDate;
 
 public class RegisterServlet extends HttpServlet {
 
@@ -50,8 +48,8 @@ public class RegisterServlet extends HttpServlet {
         System.out.println(user);
        if (password.equals(repassword)){
             daoUserSQL.put(user);
-           AddCookie.add("my_name", username, resp);
-           AddCookie.add("my_pwd", password, resp);
+           MyCookie.add("my_name", username, resp);
+           MyCookie.add("my_pwd", password, resp);
             resp.sendRedirect("/liked");
         }else {
             resp.sendRedirect("/register");

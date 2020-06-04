@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class AddCookie {
+public class MyCookie {
 
     public static  void add(String name, String value, HttpServletResponse response){
         Cookie c = new Cookie(name, value);
@@ -20,5 +20,14 @@ public class AddCookie {
       //  Arrays.stream(cookies).map(e->cookieMap.put(e.getName(),e.getValue()));
         Arrays.stream(cookies).forEach(e->cookieMap.put(e.getName(),e.getValue()));
         return cookieMap.get(name);
+    }
+
+    public static void remove(HttpServletRequest req, HttpServletResponse resp){
+        Cookie[] cookies = req.getCookies();
+        Arrays.stream(cookies)
+                .forEach(c -> {
+                    c.setMaxAge(0);
+                    resp.addCookie(c);
+                });
     }
 }

@@ -2,9 +2,9 @@ package web;
 
 import beans.User;
 import lombok.SneakyThrows;
-import service.AddCookie;
+import service.MyCookie;
 import service.GiveMeUser;
-import service.React;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,8 +34,7 @@ public class UserServlet extends HttpServlet {
         List<User> l_users = GiveMeUser.giveMeLikedUsers(con);
         data.put("users", l_users);
         sender_id = req.getParameter("user_idd");
-        AddCookie.add("sender_id",sender_id,resp);
-        System.out.println("Userdeki sender_id: "+sender_id);
+        MyCookie.add("sender_id",sender_id,resp);
         if (sender_id !=null){
             resp.sendRedirect("/messages");
         }

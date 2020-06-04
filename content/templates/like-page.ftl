@@ -43,6 +43,7 @@
             <!--/card-block-->
         </div>
         <a href="/user-list" class="btn btn-success float-right" style="color:white"><span class="fa fa-heart"></span> Show Liked People</a>
+        <a href="/logout" class="btn btn-danger ml-2" style="color: white">Logout</a>
     </div>
 </form>
 </body>

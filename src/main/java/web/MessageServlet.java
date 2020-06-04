@@ -4,11 +4,10 @@ import DAO.DAOMessageSQL;
 import DAO.DAOUserSQL;
 import beans.Message;
 import lombok.SneakyThrows;
-import service.AddCookie;
+import service.MyCookie;
 import service.GiveMeUser;
 import service.MyId;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,12 +45,11 @@ public class MessageServlet  extends HttpServlet {
         HashMap<String, Object> data = new HashMap<>();
 
 
-            sender_id =AddCookie.get("sender_id",req);
+            sender_id = MyCookie.get("sender_id",req);
             List<Message> all_sent = GiveMeUser.giveMessages(MyId.id(req, con),sender_id, daoMessageSQL);
             List<Message> all_reveived = GiveMeUser.giveMessages(sender_id, MyId.id(req,con), daoMessageSQL);
             data.put("sents", all_sent);
             data.put("receivings", all_reveived);
-
             if (sender_id !=  null){
                 data.put("opp_profile", daoUserSQL.get(sender_id).get().getProfile());
                 data.put("header_name", daoUserSQL.get(sender_id).get().getUsername());
@@ -68,7 +65,7 @@ public class MessageServlet  extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         msg_text = req.getParameter("msj");
-        sender_id = AddCookie.get("sender_id",req);
+        sender_id = MyCookie.get("sender_id",req);
         System.out.println("bu da sender id dir" + sender_id);
         daoMessageSQL.put(new Message(MyId.id(req,con),sender_id, msg_text, Date.valueOf(java.time.LocalDate.now())));
         messages.add(msg_text);

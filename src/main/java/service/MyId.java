@@ -1,15 +1,10 @@
 package service;
 
 import DAO.DAOUserSQL;
-import beans.User;
 import web.LoginServlet;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class MyId {
@@ -24,8 +19,8 @@ public class MyId {
 
     public static String id(HttpServletRequest req, Connection con) {
 
-        String my_name = AddCookie.get("my_name", req);
-        String my_pwd = AddCookie.get("my_pwd", req);
+        String my_name = MyCookie.get("my_name", req);
+        String my_pwd = MyCookie.get("my_pwd", req);
 
 
         return daoUserSQL.getAll().stream()

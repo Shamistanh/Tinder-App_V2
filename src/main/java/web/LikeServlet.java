@@ -1,15 +1,13 @@
 package web;
 
-import DAO.DAOUserSQL;
 import beans.User;
 import lombok.SneakyThrows;
-import service.AddCookie;
+import service.MyCookie;
 import service.GiveMeUser;
 import service.MyId;
 import service.React;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +27,7 @@ public class LikeServlet extends HttpServlet {
     static User WHOM;
     static String reaction;
     TemplateEngine engine;
-    private static AddCookie addCookie;
+    private static MyCookie addCookie;
     Connection con;
 
     public LikeServlet(TemplateEngine engine, Connection con) {
@@ -55,7 +53,7 @@ public class LikeServlet extends HttpServlet {
         if (reaction != null) {
             if (reaction.equals("like")) {
                 React.ireact(con, WHO, WHOM.getId(), "1");
-                AddCookie.add("liked_id",WHOM.getId(),resp);
+                MyCookie.add("liked_id",WHOM.getId(),resp);
 
             } else if (reaction.equals("dislike")) {
                 React.ireact(con, WHO, WHOM.getId(), "2");
