@@ -23,7 +23,7 @@ public class DAOUserSQL implements DAO<User> {
     private final Connection conn;
     private final String SQL_getAll = "select * from users";
     private final String SQL_get    = "select * from users where id = ?";
-    private final String SQL_put    = "insert into users (id, username, password,created_at, pic) values (?, ?, ?,?,?)";
+    private final String SQL_put    = "insert into users (id, username, password, pic) values (?, ?, ?,?)";
     private final String SQL_delete = "delete from users where id = ?";
 
     public DAOUserSQL(Connection conn) {
@@ -93,8 +93,7 @@ public class DAOUserSQL implements DAO<User> {
         stmt.setString(1, user.getId());
         stmt.setString(2, user.getUsername());
         stmt.setString(3, user.getPassword());
-        stmt.setDate(4, user.getDate());
-        stmt.setString(5, user.getProfile());
+        stmt.setString(4, user.getProfile());
         stmt.execute();
     }
 
